@@ -184,7 +184,7 @@ exports.getUserDetails = (req, res) => {
       userData.pengaduan = [];
       data.forEach((doc) => {
         userData.pengaduan.push({
-          screamId: doc.id,
+          pengaduanId: doc.id,
           ...doc.data(),
         });
       });

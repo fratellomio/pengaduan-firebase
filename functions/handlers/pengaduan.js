@@ -113,7 +113,7 @@ exports.likePengaduan = (req, res) => {
     .limit(1);
   const pengaduanDocument = db.doc(`/pengaduan/${req.params.pengaduanId}`);
 
-  let pengaduanData;
+  let pengaduanData = {};
 
   pengaduanDocument
     .get()
