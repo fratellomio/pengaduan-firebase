@@ -1,6 +1,9 @@
 const admin = require('firebase-admin');
 
-admin.initializeApp();
+var serviceAccount = require('../../pengaduan-lotim-firebase-adminsdk.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 const db = admin.firestore();
 
