@@ -121,9 +121,9 @@ exports.uploadImage = (req, res) => {
     if (mimetype !== 'image/jpeg' && mimetype !== 'image/png') {
       return res.status(400).json({ error: 'Tipe file tidak sesuai' });
     }
-    // image.extension
+
     const imageExtension = filename.split('.').pop();
-    //123.png
+
     imageFileName = `${Math.round(
       Math.random() * 1000
     ).toString()}.${imageExtension}`;

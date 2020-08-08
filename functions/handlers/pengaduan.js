@@ -23,7 +23,10 @@ exports.postOnePengaduan = (req, res) => {
     return res.status(400).json({ body: 'Body must not be empty' });
   }
   const newPengaduan = {
+    judul: req.body.judul,
     body: req.body.body,
+    lokasi: req.body.lokasi,
+    tanggal: new Date().toISOString(),
     userHandle: req.user.handle,
     userImage: req.user.imageUrl,
     createdAt: new Date().toISOString(),
