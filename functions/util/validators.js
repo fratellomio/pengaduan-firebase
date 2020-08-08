@@ -12,15 +12,15 @@ exports.validateSignupData = (data) => {
   let errors = {};
 
   if (isEmpty(data.email)) {
-    errors.email = 'must not be empty';
+    errors.email = 'Email tidak boleh kosong';
   } else if (!isEmail(data.email)) {
-    errors.email = 'Must be valid email address';
+    errors.email = 'Format alamat email salah';
   }
 
-  if (isEmpty(data.password)) errors.password = 'Must not be empty';
+  if (isEmpty(data.password)) errors.password = 'Password tidak boleh kosong';
   if (data.password !== data.confirmPassword)
-    errors.confirmPassword = 'Password mush match';
-  if (isEmpty(data.handle)) errors.handle = 'Must not be empty';
+    errors.confirmPassword = 'Password harus sama';
+  if (isEmpty(data.handle)) errors.handle = 'Password tidak boleh kosong';
 
   return {
     errors,
@@ -31,8 +31,8 @@ exports.validateSignupData = (data) => {
 exports.validateLoginData = (data) => {
   let errors = {};
 
-  if (isEmpty(data.email)) errors.email = 'Must not be empty';
-  if (isEmpty(data.password)) errors.password = 'Must not be empty';
+  if (isEmpty(data.email)) errors.email = 'Email tidak boleh kosong';
+  if (isEmpty(data.password)) errors.password = 'Password tidak boleh kosong';
 
   return {
     errors,
@@ -45,7 +45,6 @@ exports.reduceUserDetails = (data) => {
 
   if (!isEmpty(data.bio.trim())) userDetails.bio = data.bio;
   if (!isEmpty(data.website.trim())) {
-    // https://website.com
     if (data.website.trim().substring(0, 4) !== 'http') {
       userDetails.website = `http://${data.website.trim()}`;
     } else userDetails.website = data.website;

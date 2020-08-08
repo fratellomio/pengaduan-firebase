@@ -3,7 +3,12 @@ let db = {
     pengaduanId,
     {
       userHandle: 'user',
+      judul: 'judul',
       body: 'isi pesan',
+      tanggal_kejadian: '',
+      Lokasi_kejadian: '',
+      kategori: '',
+      lampiran: '',
       createdAt: '2020-07-01T00:04:53.863Z',
       likeCount: 5,
       commentCount: 2,

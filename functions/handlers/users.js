@@ -30,7 +30,7 @@ exports.signup = (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return res.status(400).json({ handle: 'this handle is already taken' });
+        return res.status(400).json({ handle: 'username sudah terdaftar' });
       } else {
         return firebase
           .auth()
@@ -58,11 +58,9 @@ exports.signup = (req, res) => {
     .catch((err) => {
       console.error(err);
       if (err.code === 'auth/email-already-in-use') {
-        return res.status(400).json({ email: 'Email is already in use' });
+        return res.status(400).json({ email: 'Email sudah digunakan' });
       } else {
-        return res
-          .status(500)
-          .json({ general: 'something went wrong, please try again' });
+        return res.status(500).json({ general: 'aduh, coba lagi ya' });
       }
     });
 };
@@ -91,9 +89,7 @@ exports.login = (req, res) => {
     .catch((err) => {
       console.error(err);
 
-      return res
-        .status(403)
-        .json({ general: 'wrong credentials, please try again' });
+      return res.status(403).json({ general: 'Email/Password salah' });
     });
 };
 
@@ -122,9 +118,8 @@ exports.uploadImage = (req, res) => {
   const busboy = new Busboy({ headers: req.headers });
 
   busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-    console.log(fieldname, file, filename, encoding, mimetype);
     if (mimetype !== 'image/jpeg' && mimetype !== 'image/png') {
-      return res.status(400).json({ error: 'Wrong file type submitted' });
+      return res.status(400).json({ error: 'Tipe file tidak sesuai' });
     }
     // image.extension
     const imageExtension = filename.split('.').pop();
@@ -154,7 +149,7 @@ exports.uploadImage = (req, res) => {
         return db.doc(`/users/${req.user.handle}`).update({ imageUrl });
       })
       .then(() => {
-        return res.json({ message: 'Image uploaded successfully' });
+        return res.json({ message: 'Gambar berhasil diupload' });
       })
       .catch((err) => {
         console.error(err);
@@ -177,7 +172,7 @@ exports.getUserDetails = (req, res) => {
           .orderBy('createdAt', 'desc')
           .get();
       } else {
-        return res.status(404).json({ error: 'User not found' });
+        return res.status(404).json({ error: 'Pengguna tidak ditemukan' });
       }
     })
     .then((data) => {
