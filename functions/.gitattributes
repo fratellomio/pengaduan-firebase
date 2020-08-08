@@ -1,1 +1,3 @@
-admin.js .gitignore pengaduan-lotim-firebase-adminsdk.json merge=ours
+admin.js merge=ours
+.gitignore merge=ours
+pengaduan-lotim-firebase-adminsdk.json merge=ours
