@@ -59,6 +59,10 @@ exports.signup = (req, res) => {
       console.error(err);
       if (err.code === 'auth/email-already-in-use') {
         return res.status(400).json({ email: 'Email sudah digunakan' });
+      } else if (err.code === 'auth/weak-password') {
+        return res
+          .status(400)
+          .json({ password: 'Password harus minimal 6 karakter' });
       } else {
         return res.status(500).json({ general: 'aduh, coba lagi ya' });
       }
