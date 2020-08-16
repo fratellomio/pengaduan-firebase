@@ -26,7 +26,7 @@ exports.postOnePengaduan = (req, res) => {
     judul: req.body.judul,
     body: req.body.body,
     lokasi: req.body.lokasi,
-    tanggal: new Date().toISOString(),
+    tanggal: req.body.tanggal,
     userHandle: req.user.handle,
     userImage: req.user.imageUrl,
     createdAt: new Date().toISOString(),
