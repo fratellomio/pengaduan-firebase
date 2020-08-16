@@ -3,6 +3,11 @@ const isEmail = (email) => {
   if (email.match(regEx)) return true;
   else return false;
 };
+const checkPassword = (password) => {
+  const passwordFormat = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+  if (password.match(passwordFormat)) return true;
+  else return false;
+};
 const isEmpty = (string) => {
   if (string.trim() === '') return true;
   else return false;
@@ -17,10 +22,15 @@ exports.validateSignupData = (data) => {
     errors.email = 'Format alamat email salah';
   }
 
-  if (isEmpty(data.password)) errors.password = 'Password tidak boleh kosong';
+  if (isEmpty(data.password)) {
+    errors.password = 'Password tidak boleh kosong';
+  } else if (!checkPassword(data.password)) {
+    errors.password =
+      'password harus terdiri dari nomor, huruf kecil dan huruf kapital';
+  }
   if (data.password !== data.confirmPassword)
     errors.confirmPassword = 'Password harus sama';
-  if (isEmpty(data.handle)) errors.handle = 'Password tidak boleh kosong';
+  if (isEmpty(data.handle)) errors.handle = 'Username tidak boleh kosong';
 
   return {
     errors,
