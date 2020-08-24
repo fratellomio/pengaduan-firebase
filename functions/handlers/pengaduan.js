@@ -19,9 +19,6 @@ exports.getAllPengaduan = (req, res) => {
 };
 
 exports.postOnePengaduan = (req, res) => {
-  if (req.body.body.trim() === '') {
-    return res.status(400).json({ body: 'Body must not be empty' });
-  }
   const newPengaduan = {
     judul: req.body.judul,
     body: req.body.body,
@@ -33,6 +30,10 @@ exports.postOnePengaduan = (req, res) => {
     likeCount: 0,
     commentCount: 0,
   };
+
+  if (Object.values(req.body).includes('')) {
+    return res.status(400).json({ body: 'Setiap bagian harus diisi' });
+  }
 
   db.collection('pengaduan')
     .add(newPengaduan)
